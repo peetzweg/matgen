@@ -6,7 +6,7 @@ var ppi = 227;          // pixels per inch
 var Srw = screen.width; // screen resolution width
 var inchInCm = 2.54;    // factor between inch and centimeters
 
-
+// How many pixel made up a centimeter on screen
 // Step 1: natural screen width in inch
 var Sw = (Sd / Math.sqrt(Math.pow(Rw, 2) + Math.pow(Rh, 2))) * Rw;
 
@@ -19,14 +19,26 @@ var ppis = (ppi / Nrw) * Srw;
 // Step 4: pixels per centimeter
 var ppcm = ppis / inchInCm;
 
+
+// How many horizontal and vertical lines
+// Step 1: real number of lines
+var rawNoOfVLines = Srw/ppcm;
+
+// Step 2: whole number of lines
+var noOfVLines = Math.floor(rawNoOfVLines);
+
+// Step 3: offset from rest of real number
+var xOffset = (Srw - (noOfVLines * Math.round(ppcm)))/2;
+
+
 var PPCM = Math.round(ppcm); // pixel per centimeter
-var cWidth = screen.width / 2;
-var cHeight = screen.height / 2;
+var cWidth = screen.width;
+var cHeight = screen.height;
 
 
 void setup()
 {
-    println("PPCM: "+ PPCM)
+    println("PPCM: "+ xOffset)
     size(cWidth,cHeight);
     background(225);
     noLoop();
@@ -35,10 +47,10 @@ void setup()
 
 void draw()
 {
-    var noOfLines = 10;
+    var noOfLines = noOfVLines;
     // vertical lines
-    for (var v = 0; v < noOfLines; v++) {
-        var x = (v*PPCM) + PPCM;
+    for (var v = 0; v <= noOfLines; v++) {
+        var x = (v*PPCM) + xOffset;
         var y1 = PPCM;
         var y2 = cHeight - PPCM;
         line(x, y1, x, y2);
