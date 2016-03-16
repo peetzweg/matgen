@@ -22,13 +22,18 @@ var ppcm = ppis / inchInCm;
 
 // How many horizontal and vertical lines
 // Step 1: real number of lines
-var rawNoOfVLines = Srw/ppcm;
+var rawNoOfVLines = Srw / ppcm;
+var Srh = screen.height;
+var rawNoOfHlines = screen.height / ppcm;
 
 // Step 2: whole number of lines
 var noOfVLines = Math.floor(rawNoOfVLines);
+var noOfHLines = Math.floor(rawNoOfHlines);
+
 
 // Step 3: offset from rest of real number
 var xOffset = (Srw - (noOfVLines * Math.round(ppcm)))/2;
+var yOffset = (Srh - (noOfHLines * Math.round(ppcm)))/2;
 
 
 var PPCM = Math.round(ppcm); // pixel per centimeter
@@ -38,8 +43,8 @@ var cHeight = screen.height;
 
 void setup()
 {
-    println("PPCM: "+ xOffset)
-    size(cWidth,cHeight);
+    println("PPCM: "+ noOfHLines);
+    size(cWidth, cHeight);
     background(225);
     noLoop();
     strokeCap(SQUARE);
@@ -47,20 +52,19 @@ void setup()
 
 void draw()
 {
-    var noOfLines = noOfVLines;
     // vertical lines
-    for (var v = 0; v <= noOfLines; v++) {
+    for (var v = 0; v <= noOfVLines; v++) {
         var x = (v*PPCM) + xOffset;
-        var y1 = PPCM;
-        var y2 = cHeight - PPCM;
+        var y1 = yOffset;
+        var y2 = cHeight - yOffset;
         line(x, y1, x, y2);
     }
 
     // horizontal lines
-    for (var h = 0; h < noOfLines; h++) {
-        var y = (h*PPCM) + PPCM;
-        var x1 = PPCM;
-        var x2 = cWidth - PPCM;
+    for (var h = 0; h < noOfHLines; h++) {
+        var y = (h*PPCM) + yOffset;
+        var x1 = xOffset;
+        var x2 = cWidth - xOffset;
         line(x1, y, x2, y);
     }
 }
