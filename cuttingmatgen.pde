@@ -1,4 +1,11 @@
+// Colors
 
+color backgroundColor = #424242;
+color lineColor       = #EEEEEE;
+color textColor       = #EEEEEE;
+
+
+// Environment
 var Sd = 13.3;          // screen size
 var Rw = 16;            // ratio width
 var Rh = 10;            // ratio height
@@ -43,18 +50,19 @@ void setup()
     println("yoffset: "+ yOffset);
 
     size(Srw, Srh);
-    background(225);
+    background(backgroundColor);
     noLoop();
     strokeCap(SQUARE);
 }
 
 void draw()
 {
+    stroke(lineColor);
     // vertical lines
     for (var v = 0; v <= noOfVLines; v++) {
         var x = (v*PPCM) + xOffset;
         var y1 = yOffset;
-        var y2 = cHeight - yOffset;
+        var y2 = Srh - yOffset;
         line(x, y1, x, y2);
     }
 
@@ -62,7 +70,7 @@ void draw()
     for (var h = 0; h <= noOfHLines; h++) {
         var y = (h*PPCM) + yOffset;
         var x1 = xOffset;
-        var x2 = cWidth - xOffset;
+        var x2 = Srw - xOffset;
         line(x1, y, x2, y);
     }
 }
