@@ -1,9 +1,12 @@
 // Colors
+var backgroundColor = #424242;
+var lineColor       = #EEEEEE;
+var textColor       = #EEEEEE;
 
-color backgroundColor = #424242;
-color lineColor       = #EEEEEE;
-color textColor       = #EEEEEE;
 
+// Text
+var fontSize = 28;
+var font = "Meta-Bold.ttf";
 
 // Environment
 var Sd = 13.3;          // screen size
@@ -45,10 +48,6 @@ var yOffset = Math.round((Srh - (noOfHLines * PPCM)) / 2);
 
 void setup()
 {
-    println("PPCM: "+ PPCM);
-    println("screenheight: "+ Srh);
-    println("yoffset: "+ yOffset);
-
     size(Srw, Srh);
     background(backgroundColor);
     noLoop();
@@ -57,20 +56,47 @@ void setup()
 
 void draw()
 {
+    // LINES
     stroke(lineColor);
+
     // vertical lines
-    for (var v = 0; v <= noOfVLines; v++) {
-        var x = (v*PPCM) + xOffset;
-        var y1 = yOffset;
-        var y2 = Srh - yOffset;
+    noOfVLines -= 2; // remove two lines for drawing numbers
+    for (var vl = 0; vl <= noOfVLines; vl++) {
+        var x = (vl*PPCM) + xOffset + PPCM ; // offset + 1 PPCM margin for numbers
+        var y1 = yOffset + (PPCM * 0.6);
+        var y2 = Srh - yOffset - (PPCM * 0.6);
         line(x, y1, x, y2);
     }
 
     // horizontal lines
-    for (var h = 0; h <= noOfHLines; h++) {
-        var y = (h*PPCM) + yOffset;
-        var x1 = xOffset;
-        var x2 = Srw - xOffset;
+    noOfHLines -= 2; // remove two lines for drawing numbers
+    for (var hl = 0; hl <= noOfHLines; hl++) {
+        var y = (hl*PPCM) + yOffset + PPCM;
+        var x1 = xOffset + (PPCM * 0.6);
+        var x2 = Srw - xOffset - (PPCM * 0.6);
         line(x1, y, x2, y);
+    }
+
+
+    // NUMBERS
+    fill(textColor);
+    PFont numbers = loadFont(font, fontSize);
+    textFont(numbers);
+    textMode(SCREEN);
+
+    // horizontal numbers
+    textAlign(CENTER);
+    for (var hn = 0; hn <= noOfVLines; hn++) {
+        var x = ((hn*PPCM) + xOffset + PPCM);
+        var y = Srh - yOffset;
+        text(hn, x, y);
+    }
+
+    // vertical numbers
+    textAlign(RIGHT);
+    for (var vn = 0; vn <= noOfHLines; vn++) {
+        var y = (vn*PPCM) + yOffset + PPCM + (fontSize / 3);
+        var x = xOffset + (PPCM * 0.5);
+        text(noOfHLines - vn, x, y); // draw numbers descending
     }
 }
