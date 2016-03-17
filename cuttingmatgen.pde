@@ -4,6 +4,7 @@ var Rw = 16;            // ratio width
 var Rh = 10;            // ratio height
 var ppi = 227;          // pixels per inch
 var Srw = screen.width; // screen resolution width
+var Srh = screen.height; // screen resolution height
 var inchInCm = 2.54;    // factor between inch and centimeters
 
 // How many pixel made up a centimeter on screen
@@ -17,28 +18,22 @@ var Nrw = Sw * ppi;
 var ppis = (ppi / Nrw) * Srw;
 
 // Step 4: pixels per centimeter
-var ppcm = ppis / inchInCm;
+var ppcm = ppis / inchInCm; // pixel per centimeter
+var PPCM = Math.round(ppcm); // round to whole number, cause there are no fractions of pixels
 
 
 // How many horizontal and vertical lines
 // Step 1: real number of lines
 var rawNoOfVLines = Srw / ppcm;
-var Srh = screen.height;
 var rawNoOfHlines = Srh / ppcm;
 
 // Step 2: whole number of lines
 var noOfVLines = Math.floor(rawNoOfVLines);
 var noOfHLines = Math.floor(rawNoOfHlines);
 
-
 // Step 3: offset from rest of real number
-var xOffset = Math.round((Srw - (noOfVLines * Math.round(ppcm)))/2);
-var yOffset = Math.round((Srh - (noOfHLines * Math.round(ppcm)))/2);
-
-
-var PPCM = Math.round(ppcm); // pixel per centimeter
-var cWidth = screen.width;
-var cHeight = screen.height;
+var xOffset = Math.round((Srw - (noOfVLines * PPCM)) / 2);
+var yOffset = Math.round((Srh - (noOfHLines * PPCM)) / 2);
 
 
 void setup()
@@ -47,7 +42,7 @@ void setup()
     println("screenheight: "+ Srh);
     println("yoffset: "+ yOffset);
 
-    size(cWidth, cHeight);
+    size(Srw, Srh);
     background(225);
     noLoop();
     strokeCap(SQUARE);
