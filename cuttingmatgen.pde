@@ -1,7 +1,7 @@
 // Colors
 var backgroundColor = #424242;
-var lineColor       = #EEEEEE;
-var textColor       = #EEEEEE;
+var lineColor       = #555555;
+var textColor       = #666666;
 
 
 // Text
@@ -99,4 +99,7 @@ void draw()
         var x = xOffset + (PPCM * 0.5);
         text(noOfHLines - vn, x, y); // draw numbers descending
     }
+
+    // applying canvas data to an image to make it savable
+    document.getElementById('image').src = document.getElementById('canvas').toDataURL();
 }
