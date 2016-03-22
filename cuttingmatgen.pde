@@ -9,10 +9,21 @@ var fontSize = 28;
 var font = "Meta-Bold.ttf";
 
 // Environment
-var Sd = 13.3;          // screen size
+
+// screen size
+var Sd = querySt("size") ? querySt("size") : 13.3;
 var Rw = 16;            // ratio width
 var Rh = 10;            // ratio height
-var ppi = 227;          // pixels per inch
+
+var ratio = querySt("ratio");
+if(ratio){
+    ratio = String(ratio);
+    Rw = ratio.split("%3A")[0]
+    Rh = ratio.split("%3A")[1]
+}
+
+// pixels per inch
+var ppi = querySt("ppi") ? querySt("ppi") : 227;
 var Srw = screen.width; // screen resolution width
 var Srh = screen.height; // screen resolution height
 var inchInCm = 2.54;    // factor between inch and centimeters
@@ -102,4 +113,16 @@ void draw()
 
     // applying canvas data to an image to make it savable
     document.getElementById('image').src = document.getElementById('canvas').toDataURL();
+}
+
+// http://stackoverflow.com/questions/18022683/how-to-access-request-query-string-parameters-in-javascript
+function querySt(Key) {
+    var url = window.location.href;
+    KeysValues = url.split(/[\?&]+/);
+    for (i = 0; i < KeysValues.length; i++) {
+        KeyValue = KeysValues[i].split("=");
+        if (KeyValue[0] == Key) {
+            return KeyValue[1];
+        }
+    }
 }

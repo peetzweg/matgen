@@ -7,7 +7,30 @@
     <title>Cutting Mat Generator</title>
 </head>
 <body>
+<form action="">
+    <label for="size">Display size:</label>
+    <select id="size" name="size">
+        <option value="13.3">13.3"</option>
+        <option value="15.4">15.4"</option>
+        <option value="21">21"</option>
+        <option value="27">27"</option>
+    </select>
+
+    <label for="ratio">Display aspect ratio:</label>
+    <select id="ratio" name="ratio">
+        <option value="16:10">16:10</option>
+        <option value="16:9">16:9</option>
+        <option value="4:3">4:3</option>
+    </select>
+
+    <label for="ppi">Pixels per inch:</label>
+    <input type="number" id="ppi" name="ppi" value="227" min="100" max="500" step="100" pattern="[0-9]{3}" placeholder="227">
+
+    <input type="submit" value="Generate">
+</form>
     <canvas hidden data-processing-sources="cuttingmatgen.pde" id="canvas"></canvas>
     <img id="image" alt="Actually, you should see something...">
+<script !src="">
+</script>
 </body>
 </html>
