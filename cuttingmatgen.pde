@@ -59,6 +59,11 @@ var yOffset = Math.round((Srh - (noOfHLines * PPCM)) / 2);
 
 void setup()
 {
+    // Debug Information
+    console.log("Screen diameter: "+ Sd+'in');
+    console.log("Pixels per inch: "+ ppi);
+    console.log("Ratio: "+Rw+":"+Rh);
+
     size(Srw, Srh);
     background(backgroundColor);
     noLoop();
