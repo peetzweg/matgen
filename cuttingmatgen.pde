@@ -78,18 +78,28 @@ void draw()
     // vertical lines
     noOfVLines -= 2; // remove two lines for drawing numbers
     for (var vl = 0; vl <= noOfVLines; vl++) {
+        // position calculation
         var x = (vl*PPCM) + xOffset + PPCM ; // offset + 1 PPCM margin for numbers
-        var y1 = yOffset + (PPCM * 0.6);
+        var y1 = yOffset + (PPCM);
         var y2 = Srh - yOffset - (PPCM * 0.6);
+
+        // increase line width every 5cm
+        vl % 5 == 0 ? strokeWeight(3) : strokeWeight(1);
+
         line(x, y1, x, y2);
     }
 
     // horizontal lines
     noOfHLines -= 2; // remove two lines for drawing numbers
     for (var hl = 0; hl <= noOfHLines; hl++) {
+        // position calculation
         var y = (hl*PPCM) + yOffset + PPCM;
         var x1 = xOffset + (PPCM * 0.6);
-        var x2 = Srw - xOffset - (PPCM * 0.6);
+        var x2 = Srw - xOffset - (PPCM);
+
+        // increase line width every 5cm
+        hl % 5 == 0 ? strokeWeight(3) : strokeWeight(1);
+
         line(x1, y, x2, y);
     }
 
