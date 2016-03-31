@@ -72,6 +72,9 @@ void setup()
 
 void draw()
 {
+    // Translate to draw in the mat more centered
+    translate(PPCM * 0.5, -PPCM * 0.5);
+
     // LINES
     stroke(lineColor);
 
@@ -79,7 +82,7 @@ void draw()
     noOfVLines -= 2; // remove two lines for drawing numbers
     for (var vl = 0; vl <= noOfVLines; vl++) {
         // position calculation
-        var x = (vl*PPCM) + xOffset + PPCM ; // offset + 1 PPCM margin for numbers
+        var x = (vl*PPCM) + xOffset + PPCM; // offset + 1 PPCM margin for numbers
         var y1 = yOffset + (PPCM);
         var y2 = Srh - yOffset - (PPCM * 0.6);
 
