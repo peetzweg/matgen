@@ -87,9 +87,17 @@ void draw()
         var y2 = Srh - yOffset - (PPCM * 0.6);
 
         // increase line width every 5cm
-        vl % 5 == 0 ? strokeWeight(3) : strokeWeight(1);
+        vl % 5 == 0 ? strokeWeight(3) : strokeWeight(2);
 
         line(x, y1, x, y2);
+
+        // .5cm lines
+        if(vl < noOfVLines){ // skip last one, do not draw outside of the mat
+            x += PPCM * 0.5;
+            y2 -= PPCM * 0.2;
+            strokeWeight(1);
+            line(x, y1, x, y2);
+        }
     }
 
     // horizontal lines
@@ -101,9 +109,17 @@ void draw()
         var x2 = Srw - xOffset - (PPCM);
 
         // increase line width every 5cm
-        hl % 5 == 0 ? strokeWeight(3) : strokeWeight(1);
+        hl % 5 == 0 ? strokeWeight(3) : strokeWeight(2);
 
         line(x1, y, x2, y);
+
+        // .5cm lines
+        if(hl < noOfHLines){ // skip last one, do not draw outside of the mat
+            y += PPCM * 0.5;
+            x1 += PPCM * 0.2;
+            strokeWeight(1);
+            line(x1, y, x2, y);
+        }
     }
 
 
